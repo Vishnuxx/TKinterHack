@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter.colorchooser import askcolor
 from labelTool import *
 from paintUtils import *
-from PIL import Image, ImageDraw
 
 class Paint:
     DEFAULT_PEN_SIZE = 5.0
@@ -16,7 +15,7 @@ class Paint:
         self.setupView()
 
         self.c = Canvas(self.root, bg='white', width=600, height=600)
-        self.c.grid(row=1, columnspan=5)
+        self.c.grid(row=1, columnspan=5 , sticky='nsew')
         self.setup()
         self.root.mainloop()
 
@@ -43,7 +42,7 @@ class Paint:
         self.old_x = 0
         self.old_y = 0
         
-        self.brushHead = PhotoImage(image='./res/brush1.png' , height=100 , width=100 , gamma=1.0)
+        self.brushHead = PhotoImage(file='./res/brush1.png' , height=100 , width=100 , gamma=1.0)
         self.isPen = True
         self.line_width = self.choose_size_button.get()
         self.color = self.DEFAULT_COLOR
@@ -70,10 +69,6 @@ class Paint:
 
     def clearCanvas(self):
         self.c.delete("all")
-
-    def export(self , name):
-        image1 = Image.new("RGB", (width, height), white)
-        draw = ImageDraw.Draw(image1)
 
     def resize(self , w , h):
         self.c.config(width=w, height=h)
@@ -113,7 +108,7 @@ class Paint:
             if self.old_x and self.old_y:
                 x = self.old_x + (math.sin(angle) * i)
                 y = self.old_y + (math.cos(angle) * i)
-                self.c.create_image(x, y,  image=self.brushHead.image, anchor='nw')
+                self.c.create_image(x, y,  image=self.brushHead, anchor='nw')
         self.old_x = event.x
         self.old_y = event.y
 
