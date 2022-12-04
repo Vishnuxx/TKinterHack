@@ -43,7 +43,7 @@ class Paint:
         self.old_x = 0
         self.old_y = 0
         
-        self.brushHead = Label(image=PhotoImage(file='./res/brush1.png' , height=100 , width=100 , gamma=1.0))
+        self.brushHead = PhotoImage(file='./res/brush1.png' , height=100 , width=100 , gamma=1.0)
         self.isPen = True
         self.line_width = self.choose_size_button.get()
         self.color = self.DEFAULT_COLOR
